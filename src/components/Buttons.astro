@@ -1,0 +1,12 @@
+---
+const { confirmed, reminder } = Astro.props;
+---
+
+<div class="flex gap-2">
+  <button class="confirmed btn btn-accent btn-sm" data-confirmed={confirmed}
+    >Appt Confirmed</button
+  >
+  <button class="reminder btn btn-accent btn-sm" data-reminder={reminder}
+    >Reminder</button
+  >
+</div>

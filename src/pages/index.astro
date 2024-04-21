@@ -1,9 +1,15 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Table from "../components/Table.astro";
 ---
 
 <Layout title="Welcome to Astro.">
   <main>
-    <h1>Copy Center</h1>
+    <Navbar />
+
+    <div class="col-span-3">
+      <Table />
+    </div>
   </main>
 </Layout>
