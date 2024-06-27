@@ -11,6 +11,10 @@ function extractCityState(address) {
   }
   return `${parts[1].trim()}, ${parts[2].trim().split(" ")[0]}`;
 }
+
+function getFirstName(fullName) {
+  return fullName.split(" ")[0];
+}
 ---
 
 <>
@@ -23,8 +27,10 @@ function extractCityState(address) {
         <td>{extractCityState(client.address)}</td>
         <td>
           <Buttons
+            phone={client.phone}
             confirmed={`APPOINTMENT CONFIRMED!\n\n${client.name} - ${client.phone}\n${client.address}\n${client.date}, ${client.time}\n\nINVOICE:\n${client.invoice}\n\nThere's a charge of $79 to mount TVs above a fireplace.\n\nIf you need to cancel or reschedule, please give us a heads up at least 24 hours prior to ${client.date}, ${client.time}.`}
-            reminder={`Hi ${client.name}. This is a reminder of your TV mount appointment tomorrow. Estimated arrival time: ${client.time}.\n------\n${client.invoice}\n― We accept Venmo, Cash App, Check, Credit Card, or Cash.\n― Pay the technician directly after the service is completed.\n\nConnecting all peripheral devices to the TV is included in our service, as long as you provide all the necessary cables. Setting up devices is NOT included in our service. The cost to set up devices is $99 per device (Cable Box, Apple TV, Roku, etc).\n\nIf you need to cancel or reschedule, you can do so by replying to this text message. Or call us at least 6 hours before ${client.date}, ${client.time}.`}
+            reminder={`Hi ${getFirstName(client.name)}. This is a reminder of your TV mount appointment tomorrow. Estimated arrival time: ${client.time}.\n------\n${client.invoice}\n― We accept Venmo, Cash App, Check, Credit Card, or Cash.\n― Pay the technician directly after the service is completed.\n\nConnecting all peripheral devices to the TV is included in our service, as long as you provide all the necessary cables. Setting up devices is NOT included in our service. The cost to set up devices is $99 per device (Cable Box, Apple TV, Roku, etc).\n\nIf you need to cancel or reschedule, you can do so by replying to this text message. Or call us at least 6 hours before ${client.date}, ${client.time}.`}
+            whatsapp={`${client.name} - ${client.phone}\n*${client.date}, ${client.time}*\n${client.address}\n${client.service.split(", ").join("\n")}\n*${client.payment}*`}
           />
         </td>
       </tr>
@@ -50,6 +56,8 @@ function extractCityState(address) {
     });
   };
 
+  setupButtonListeners(".phone", "data-phone");
   setupButtonListeners(".confirmed", "data-confirmed");
   setupButtonListeners(".reminder", "data-reminder");
+  setupButtonListeners(".whatsapp", "data-whatsapp");
 </script>
