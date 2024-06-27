@@ -1,7 +1,9 @@
 ---
 import Buttons from "./Buttons.astro";
 
-const response = await fetch(import.meta.env.URL).then((res) => res.json());
+const response = await fetch(import.meta.env.BASE_SCRIPT).then((res) =>
+  res.json(),
+);
 const data = response.data;
 
 function extractCityState(address) {
