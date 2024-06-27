@@ -41,11 +41,19 @@ function getFirstName(fullName) {
 </>
 
 <script>
+  const feedbackMessage = document.getElementById("feedback-message");
+
   const handleCopyText = (element, attribute) => {
     const message = element.getAttribute(attribute);
     navigator.clipboard
       .writeText(message)
-      .then(() => console.log(`${attribute} copied!`))
+      .then(() => {
+        console.log(`${attribute} copied!`);
+        feedbackMessage.classList.remove("hidden");
+        setTimeout(() => {
+          feedbackMessage.classList.add("hidden");
+        }, 700);
+      })
       .catch((err) => console.error("Failed to copy text: ", err));
   };
 
